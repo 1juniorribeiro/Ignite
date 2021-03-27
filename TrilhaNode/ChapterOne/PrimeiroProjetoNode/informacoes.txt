@@ -1,0 +1,4 @@
+middlewares sõa funções que ficam entre a request e a response, são funções que validam nossas regras de negocios 
+e nossas rotas somente encaminham as informações para esses middlewares e retornam a resposta
+
+aqui vamos criar um middleware para verificar se a conta existe
