@@ -1,0 +1,18 @@
+construção de uma aplicação para o aluguel de carros
+
+1º passo criar a pasta de rotas para começar a criação da API, ela disse q vamos primeiro criar as categorias do carro
+para cada recurso temos uma rota
+
+2º criar o model para servir de modelo de dados com a tipagem
+
+3º criar o repositorios que servem para fazer a manipulação de dados, faz o acesso ao banco de dados e manipulação de dados
+
+aparentemente o mapa de fluxo da aplicação até agora é
+
+o server recebe e filtra a requisiçção atraves do nome da rota e envia a requisição para suas respectivas rotas
+a rota recebe os dados, verifica o metodo http e executa o recebido, se foi post ou get
+dentro do metodo escolhido, o metodo chama o repositorio para que manipule os dados, seja para buscar e mostrar ou
+para criar os dados, o repositorio usa o model como base e parametro para validar os  dados e serem armazenados na tipagem correta
+
+resumindo
+server <---> rotas <---> repositorios <---> model
