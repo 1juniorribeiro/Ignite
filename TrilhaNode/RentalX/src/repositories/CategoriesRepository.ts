@@ -1,14 +1,12 @@
 import Category from '../model/Category'; // importamos o model de categoria, a classe que representa o modelo e a tipagem dos dados
+import {
+  // importamos a interface de transferencia de dados via objeto e a interface padrao do repositorio
+  ICategoriesRepository,
+  ICreateCategoryDTO,
+} from './ICategoriesRepository';
 
-// DTO => Data transfer object,  criar um objeto que vai ser responsavel pela transferencia de dados entre uma camada e outra
-interface ICreateCategoryDTO {
-  // criamos um interface para receber os dados para ser transferido para o array
-  name: string; // colocamos os nome e os tipos dos atributos
-  description: string;
-}
-
-export default class CategoriesRepository {
-  // criamos a classe do repositorio que vai executar todas as manipulações de dados
+export default class CategoriesRepository implements ICategoriesRepository {
+  // criamos a classe do repositorio implementando o tipo de operações que ele vai utilizar, que vai executar todas as manipulações de dados
   private categories: Category[]; // criamos uma variavel privada com a tipagem do nosso model das categorias
 
   constructor() {

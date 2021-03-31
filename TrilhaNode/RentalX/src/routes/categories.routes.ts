@@ -1,5 +1,6 @@
 import { Router } from 'express'; // importamos o router do express para usarmos ele para gerenciar nossas rotas
 import CategoriesRepository from '../repositories/CategoriesRepository'; // importamos nosso repositorio para a manipulação dos dados
+import CreateCategoryService from '../services/CreateCategoryService'; // importamos o service de criação de categoria
 
 const categoriesRoutes = Router(); // atribuimos as funções do router para nnosso categoriesroutes
 
@@ -9,14 +10,9 @@ categoriesRoutes.post('/', (request, response) => {
   // criamos a rota post com o / pois quem está gerenciando o link que vem depois da / é o server que manda para esse arquivo, e se for um post /categories vem para esse arquivo e depois para essa função
   const { name, description } = request.body; // recebemos o name e a descrição pelo corpo da requisição
 
-  const categoryAlreadyExists = categoriesRepository.findByName(name); // usamos o metodo do repositorio para procurar o nome informado no corpo da requisição e atribuimos ele a uma constante
+  const createCategoryService = new CreateCategoryService(categoriesRepository); // instanciamos o service com o repositori oque vai ser utilizado
 
-  if (categoryAlreadyExists) {
-    // se encontrarmos o nome informado a categoria não vai poder ser criada e vamos retornar um erro
-    return response.status(400).json({ error: 'Category already exists!' });
-  }
-
-  categoriesRepository.create({ name, description }); // se não encontrar vamos passar o nome e a descrição para o nosso repositorio e usar o metodo create para armazenar os dados no array
+  createCategoryService.execute({ name, description }); // usamos o metodo execute para executar a tarefa, que no caso é a criação de categorias
 
   return response.status(201).send(); // depois de criado retornamos um status de sucesso
 });

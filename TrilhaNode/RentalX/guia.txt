@@ -16,3 +16,28 @@ para criar os dados, o repositorio usa o model como base e parametro para valida
 
 resumindo
 server <---> rotas <---> repositorios <---> model
+
+Agora vamos falar de SOLID para seguir com a aplicação
+Precisamos de codigo limpo com nomes declarativos
+
+S -> SRP - Single Responsability Principle(Principio da Responsabilidade Única)
+O -> OCP - Open-Closed Principle(Principio aberto/fechado)
+L -> LSP - Liskov Substituition Principle( Principio da substuição de liskov)
+I -> ISP - Interface Segregation Principle( Principio da Segregação de interface)
+D -> DIP - Dependency Inversion Principle( Principio da inversão de Dependencia)
+
+vamos começar a aplicar o principio de responsabilidade unica agora
+
+dica, for usar o implements através do interface do repositorio de categorias usar o atalho Ctrl + . para implementar de forma rapida e automatica
+
+Com a implementação de 2 principios do SOLID mudamos um pouco o fluxo da aplicação
+
+server <---> Rotas <---> Service <---> Interface do Repositório <---> Repositório <---> Model
+
+A interface do repositório é definida para que nosso  repositorios possam ser substituidos de forma facil, agora se
+mudarmoso repositorio não alteramos em nada o service, pq o service vai de encontro com a interface e a interface faz
+a manipulaçãocom quem está implementando ela, usando o implements, e a interface e o repositorio usam o model como
+modelo padrão de dados a serem trabalhados, esse é principio de substituição de liskov
+Tamném usamos o Single responsability para definirmos uma responsabilidade para cada modulo, a rota encaminha para o
+service que mostra para o repositorio o que é feito com os dados e o repositorio manipula os dados
+também foi usado algo de inversão de dependencia, mas a frente quando eu entender melhor comento aqui
