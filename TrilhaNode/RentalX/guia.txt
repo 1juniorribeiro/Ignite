@@ -81,3 +81,8 @@ vamos usar stream no node, o conceito de stream é que o strem permite com que a
  segue o fluxo,
 
  arquivo pelo multipart partform <--> multer <--> fs <--> csvparse <--> criamos o arquivo no banco
+
+agora vemos a parte de documentação, precisamos adicionar o pacote swagger-ui-express
+colocamos no tsconfig   "resolveJsonModule": true
+importamos o swagger no server e colocamos o app para usar ele com um  rota para visualizar a documentação
+criamos dentro da src um arquivo swagger.json para colocarmos as informações, vou precisar estudar mais e praticar com essa ferramenta

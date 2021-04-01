@@ -37,6 +37,7 @@ export default class ImportCategoryUseCase {
         })
         .on('end', () => {
           // quando acabar o arquivo retornamos o array de elementos separados
+          fs.promises.unlink(file.path);
           resolve(categories);
         })
         .on('error', err => {
