@@ -1,17 +1,29 @@
-import Category from '../model/Category'; // importamos o model de categoria, a classe que representa o modelo e a tipagem dos dados
+import Category from '../../model/Category'; // importamos o model de categoria, a classe que representa o modelo e a tipagem dos dados
 import {
   // importamos a interface de transferencia de dados via objeto e a interface padrao do repositorio
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from './ICategoriesRepository';
+} from '../ICategoriesRepository';
 
 export default class CategoriesRepository implements ICategoriesRepository {
   // criamos a classe do repositorio implementando o tipo de operações que ele vai utilizar, que vai executar todas as manipulações de dados
   private categories: Category[]; // criamos uma variavel privada com a tipagem do nosso model das categorias
 
-  constructor() {
+  private static INSTANCE: CategoriesRepository; // aqui criamos uma variavel privada e estatica, que é do tipo da classe do repositorio
+
+  private constructor() {
     // criamos uma função construtora para que toda vez que a classe seja instanciada para a utilização ele atribua um array vazio para a variavel
     this.categories = []; // a atribuição é feita através do this
+  }
+
+  public static getInstance(): CategoriesRepository {
+    // aqui criamos um metodo que vai retornar uma classe do tipo categories repository
+    if (!CategoriesRepository.INSTANCE) {
+      // se nossa variavel instance criada em cima não tiver nada, instanciamos um novo categories repository
+      CategoriesRepository.INSTANCE = new CategoriesRepository();
+    }
+
+    return CategoriesRepository.INSTANCE; // se tiver retornamos essa nossa instancia para prosseguir com a aplicação
   }
 
   create({ name, description }: ICreateCategoryDTO): void {

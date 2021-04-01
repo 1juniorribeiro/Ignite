@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-constructor */
-import { ICategoriesRepository } from '../repositories/ICategoriesRepository'; // importamos os tipos de manipulação de dados a serem feitas por um repositorio
+import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'; // importamos os tipos de manipulação de dados a serem feitas por um repositorio
 
 interface IRequest {
   // criamos um tipo request para definir quais informações vao ser recrecebidas
@@ -7,7 +7,7 @@ interface IRequest {
   description: string;
 }
 
-export default class CreateCategoryService {
+export default class CreateCategoryUseCase {
   // criamos a classe de criação de categoria e exportamos
   constructor(private categoriesRepository: ICategoriesRepository) {} // criamos a função construtora com um repositorio privado sendo inicado com o tipo de operção que podem ser feitas pelo repositorio
 

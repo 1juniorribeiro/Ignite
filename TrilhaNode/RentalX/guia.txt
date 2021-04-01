@@ -41,3 +41,33 @@ modelo padrão de dados a serem trabalhados, esse é principio de substituição
 Tamném usamos o Single responsability para definirmos uma responsabilidade para cada modulo, a rota encaminha para o
 service que mostra para o repositorio o que é feito com os dados e o repositorio manipula os dados
 também foi usado algo de inversão de dependencia, mas a frente quando eu entender melhor comento aqui
+
+basicamente essas mudanças dizem respeito a aplicação conhecer sempre a abstração e não a implementação da manipulação dos dados
+
+
+---------------- continuar agora cadastrando a especifição pq ela é independente e não depende de nenhum modulo
+ao implementar uma nova informação uma nova tabela começamos com o model para definir o que ela vai ter
+
+agora vamos separar a aplicação em modulos, separar em pequenos blocos da aplicação
+
+criação dos use cases que são as operações que o usuario faz
+
+agora vamos aprender o Singleton Pattern
+criar apenas uma instancia de uma classe que vai ser uma instancia global para a aplicação
+verificar se realmente a classe precisa ser uma singleton ou precisa ser instanciada mais de uma vez
+
+após separarmos a aplicação em módulos e em casos de uso ao invés de services, a aplicação fica com o novo fluxo
+
+Server - que usa o express para ouvir as rotas pelo router do arquivo index das rotas que organiza as rotas, e usa o json e conecta ao express
+   |
+Rotas - que conecta o link da rota ao controller que controla as requisições e respostas
+   |
+  UseCases(pasta que separa os casos de usos da aplicação) - que são divididos em use case e controller do caso de uso
+      |
+  Controller - recebe a requisição e da a resposta para as rotas atraves da função handle, essa função chama o useCase e retorna a resposta necessaria
+      |
+  UseCase - o use case passa os dados da requisição e escolhe que metodos do repositorio vão ser utilizados para dar a resposta e executar a manipulação dos dados
+      |
+  Repositories - que fazem a manipulação dos dados, onde tem todos os nossos metodos, vale lembrar que nosso repositorio é o criado com interfaze as nossas funções que nós criamos são apenas implementações da interface de repositorio que criamos, e essa implementação muda facilmente, a interface só se alterarem os dados
+      |
+  Model - que diz que dados e que tipo de dados serão aceitos
