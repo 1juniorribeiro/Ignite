@@ -71,3 +71,13 @@ Rotas - que conecta o link da rota ao controller que controla as requisições e
   Repositories - que fazem a manipulação dos dados, onde tem todos os nossos metodos, vale lembrar que nosso repositorio é o criado com interfaze as nossas funções que nós criamos são apenas implementações da interface de repositorio que criamos, e essa implementação muda facilmente, a interface só se alterarem os dados
       |
   Model - que diz que dados e que tipo de dados serão aceitos
+
+agora vamos aprender a trabalhar com upload de arquivos com o multer
+vamos usar stream no node, o conceito de stream é que o strem permite com que a gente leio o arquivo por partes/pedaços
+
+ agora aprendemos a utilizar o multer, fs e csv parse para lermos uma tabela e armazenarmos as informações de modo separado no array se
+ fizemos o armazenamento de dados baseado em um arquivo csv
+
+ segue o fluxo,
+
+ arquivo pelo multipart partform <--> multer <--> fs <--> csvparse <--> criamos o arquivo no banco
