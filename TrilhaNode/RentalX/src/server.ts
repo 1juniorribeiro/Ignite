@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
 import express from 'express'; // importamos o express, lembrese de acicionar os tipos
 import swaggerUi from 'swagger-ui-express';
 
+import './database';
+import './shared/container';
 import router from './routes'; // importamos o arquivo de rotas da nossa pasta de rotas
 import swaggerFile from './swagger.json';
 

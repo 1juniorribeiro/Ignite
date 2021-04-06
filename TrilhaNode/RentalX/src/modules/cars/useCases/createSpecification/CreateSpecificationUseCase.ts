@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-constructor */
+import { inject, injectable } from 'tsyringe';
 import ISpecificationRepository from '../../repositories/implementations/SpecificationRepository'; // importamos o nosso repositorio, vale lembrar que importamos o repositorio e não a implementação dele, tem q ser desse tipo
 // ai no nosso index desse caso de uso colocamos o repositorio a ser usado
 interface IRequest {
@@ -7,21 +8,25 @@ interface IRequest {
   description: string;
 }
 
+@injectable()
 export default class CreateSpecificationUseCase {
   // criamos um classe para criar uma especificação
-  constructor(private specificationsRepository: ISpecificationRepository) {} // instanciamos um repositorio do tipo de repositorio de especificações
+  constructor(
+    @inject('SpecificationsRepository')
+    private specificationsRepository: ISpecificationRepository,
+  ) {} // instanciamos um repositorio do tipo de repositorio de especificações
 
-  execute({ name, description }: IRequest): void {
+  async execute({ name, description }: IRequest): Promise<void> {
     // criamos a função para executar a tarefa que nesse caso é armazenar os dados num array
-    const SpefificationAlreadyExists = this.specificationsRepository.findByName(
-      // criamos uma constante que recebe o a verificação pelo metodo findByName para verificar se existe um nome desse
+    const SpefificationAlreadyExists = await this.specificationsRepository.findByName(
       name,
     );
+    // criamos uma constante que recebe o a verificação pelo metodo findByName para verificar se existe um nome desse
 
     if (SpefificationAlreadyExists) {
       throw new Error('Specification already exists'); // se ja existir essa especificação, damos um erro
     }
 
-    this.specificationsRepository.create({ name, description }); // se não existir fazemos um create pelo nosso repositorio, e o nosso repositorio pelo metodo create faz um push no array
+    await this.specificationsRepository.create({ name, description }); // se não existir fazemos um create pelo nosso repositorio, e o nosso repositorio pelo metodo create faz um push no array
   }
 }

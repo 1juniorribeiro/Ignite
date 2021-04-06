@@ -1,13 +1,19 @@
 import { v4 as uuidV4 } from 'uuid'; // importamos a versão 4 do uuid e atribuimos a um nome entendivel
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 
-export default class Specification {
-  // criamos a classe para servir de padão de atributos e tipagem de especificação
+@Entity('categories')
+class Category {
+  // criamos a classe para servir de padão de atributos e tipagem de categoria
+  @PrimaryColumn()
   id?: string; // colocamos o id como opcional para que ele seja gerado automaticamente pelo constructor a baixo toda vez que esse model for instanciado
 
+  @Column()
   name: string;
 
+  @Column()
   description: string;
 
+  @CreateDateColumn()
   created_at: Date;
 
   constructor() {
@@ -18,3 +24,5 @@ export default class Specification {
     }
   }
 }
+
+export default Category; // exportamos a categoria

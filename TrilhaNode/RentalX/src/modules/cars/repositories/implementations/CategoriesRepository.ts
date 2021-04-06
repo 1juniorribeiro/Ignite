@@ -1,4 +1,5 @@
-import Category from '../../model/Category'; // importamos o model de categoria, a classe que representa o modelo e a tipagem dos dados
+import { getRepository, Repository } from 'typeorm';
+import Category from '../../entities/Category'; // importamos o model de categoria, a classe que representa o modelo e a tipagem dos dados
 import {
   // importamos a interface de transferencia de dados via objeto e a interface padrao do repositorio
   ICategoriesRepository,
@@ -7,45 +8,37 @@ import {
 
 export default class CategoriesRepository implements ICategoriesRepository {
   // criamos a classe do repositorio implementando o tipo de operações que ele vai utilizar, que vai executar todas as manipulações de dados
-  private categories: Category[]; // criamos uma variavel privada com a tipagem do nosso model das categorias
 
-  private static INSTANCE: CategoriesRepository; // aqui criamos uma variavel privada e estatica, que é do tipo da classe do repositorio
+  private repository: Repository<Category>;
 
-  private constructor() {
+  constructor() {
     // criamos uma função construtora para que toda vez que a classe seja instanciada para a utilização ele atribua um array vazio para a variavel
-    this.categories = []; // a atribuição é feita através do this
+    this.repository = getRepository(Category); // a atribuição é feita através do this
   }
 
-  public static getInstance(): CategoriesRepository {
-    // aqui criamos um metodo que vai retornar uma classe do tipo categories repository
-    if (!CategoriesRepository.INSTANCE) {
-      // se nossa variavel instance criada em cima não tiver nada, instanciamos um novo categories repository
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-    }
-
-    return CategoriesRepository.INSTANCE; // se tiver retornamos essa nossa instancia para prosseguir com a aplicação
-  }
-
-  create({ name, description }: ICreateCategoryDTO): void {
+  async create({ name, description }: ICreateCategoryDTO): Promise<void> {
     // aqui criamos o metodo create para armazenar os dados no array, colocamos um void pois a função não retorna nada, só faz um push no array
-    const category = new Category(); // aqui criamos uma variavel da categoria que recebe a instancia de uma nova categoria com o molde do model
 
-    Object.assign(category, { name, description, created_at: new Date() }); // aqui usamos o assign para atribuir a constante de categoria um objeto com as informações necessarias
+    const category = this.repository.create({
+      description,
+      name,
+    });
 
-    this.categories.push(category); // aqui fazmos o push desse objeto category no array de categorias
+    await this.repository.save(category);
   }
 
-  list(): Category[] {
+  async list(): Promise<Category[]> {
     // aqui criamos o metodo list para listar as tegorias que seguem o padrão do model
-    return this.categories; // através do this temos acesso ao array de categories e retornamos esse array
+    const categories = await this.repository.find();
+
+    return categories;
   }
 
-  findByName(name: string): Category {
+  async findByName(name: string): Promise<Category> {
     // criamos o metodo para encontrar uma categoria com o nome informado
-    const category = this.categories.find(
-      // criamos uma constante que recebe um objeto que é procurado dentro do array de categorias com o nome informado na função
-      categoryData => categoryData.name === name, // se dentro dos dados das categorias encontrar um objeto com o nome estritamente igual ao nome informado para a função ele é retornado a constante category
-    );
+    const category = await this.repository.findOne({
+      name,
+    });
     return category; // e então retornamos a categoria, se não tiver vai retornar vazio
   }
 }

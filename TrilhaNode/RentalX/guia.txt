@@ -86,3 +86,40 @@ agora vemos a parte de documentação, precisamos adicionar o pacote swagger-ui-
 colocamos no tsconfig   "resolveJsonModule": true
 importamos o swagger no server e colocamos o app para usar ele com um  rota para visualizar a documentação
 criamos dentro da src um arquivo swagger.json para colocarmos as informações, vou precisar estudar mais e praticar com essa ferramenta
+
+começamos a utilizar o docker compose para rodar nossa aplicação e banco de dados
+
+criamos o dockerfile para configurar a inicialização da aplicação na imagem do node
+criamos o .dockerignore para ignorar a node modules, .vscode e git
+e criamos o docker-compose.yml para rodarmos a aplicação em realtime com reload, ele faz o orquestramento das imagens a serem utilizadas
+docker-compose up ele roda em real time e se sairmos a imagem para de rodar
+docker-compose up -d ele fica rodando, em background
+
+----comandos básicos docker ----------
+docker ps - lista os containers em execução
+docker ps -a - lista todos os containers que existem
+docker rm id_docontainer ou nome - remove o docker, ele precisa estar parado
+docker start nome ou id_docontainer - inicia o container
+docker stop nome ou id_docontainer - para o container
+
+docker-compose up - sobe o container em realtime, ctrl + c cancela e deixa de executar
+docker-compose up -d - executa o container em background e libera o terminal
+docker-compose stop - para o container em execução
+docker-compose down - remove o docker compose, remove tudo o que foi criado, apaga tudo q foi criado
+docker-compose start - inicia os serviços do docker compose
+
+docker exec -it id_docontainer ou nome /bin/bash - temos acesso ao container ctrl + d sai da aplicação
+docker logs nome ou id_docontainer - mostra e volta pro terminal
+docker logs nome ou id_docontainer -f - mostra em realtime os logs
+
+agora vamos utilizar um ORM para gerenciar nosso banco de dados que vamos criar, vamos utilizar uma imagem do docker
+do postGres e vamos utilizar o typeorm para gerenciar
+
+temos que criar nossa pasta de database e o index para fazer a conexão com o typeorm
+
+e temos que criar um arquivo ormconfig.json com as configurações do typeorm
+e criamos nosso banco de dados com o docker compose
+
+comando para verificar o ip do nosso container
+
+docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nome do container

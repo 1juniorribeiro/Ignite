@@ -2,9 +2,9 @@ import { Router } from 'express'; // importamos o router do express para usarmos
 
 import multer from 'multer'; // importamos o multer para gerenciar nosso upload de arquivos
 
-import createCategoryController from '../modules/cars/useCases/createCategory'; // importamos os dois controllers dos dois metodos utilizados em categorias
-import listCategoriesController from '../modules/cars/useCases/listCategories';
-import importCategoryController from '../modules/cars/useCases/importCategory';
+import CreateCategoryController from '../modules/cars/useCases/createCategory/CreateCategoryController';
+import ListCategoriesController from '../modules/cars/useCases/listCategories/ListCategoriesController';
+import ImportCategoryController from '../modules/cars/useCases/importCategory/ImportCategoryController';
 
 const categoriesRoutes = Router(); // atribuimos as funções do router para nnosso categoriesroutes
 
@@ -13,18 +13,18 @@ const upload = multer({
   dest: './tmp',
 });
 
-categoriesRoutes.post('/', (request, response) => {
-  return createCategoryController.handle(request, response); // agora passamos nosso request e response para a função handle do suporte que fará a tratativa dos dados
-});
+const createCategoryController = new CreateCategoryController();
+const importCategoryController = new ImportCategoryController();
+const listCategoriesController = new ListCategoriesController();
 
-categoriesRoutes.get('/', (request, response) => {
-  // criamos a rota de listagem das categorias existentes
-  return listCategoriesController.handle(request, response); // a função handle do controler que vai ler a requisição e dar a resposta agora
-});
+categoriesRoutes.post('/', createCategoryController.handle);
 
-categoriesRoutes.post('/import', upload.single('file'), (request, response) => {
-  // criamos uma nova rota para fazer a importação de arquivos que recebe o upload como um middleware que tem q ser passado com o nome de file por um multipart form
-  return importCategoryController.handle(request, response); // passamos nossa request e response para o controller
-});
+categoriesRoutes.get('/', listCategoriesController.handle);
+
+categoriesRoutes.post(
+  '/import',
+  upload.single('file'),
+  importCategoryController.handle,
+);
 
 export default categoriesRoutes; // exportamos a rota, que importamos no server

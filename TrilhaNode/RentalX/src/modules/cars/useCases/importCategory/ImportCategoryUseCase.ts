@@ -1,5 +1,6 @@
 import fs from 'fs'; // importamos a biblioteca de filesystem do proprio node para o gerenciamento de arquivos
 import csvParse from 'csv-parse'; // importamos o csvparse que faz a leitura e converte o scv em dados
+import { inject, injectable } from 'tsyringe';
 import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'; // importamos a tipagem do repositorio
 
 interface IImportCategory {
@@ -8,9 +9,13 @@ interface IImportCategory {
   description: string;
 }
 
+@injectable()
 export default class ImportCategoryUseCase {
   // criamos a classe para executar a leitura e validação do caso de uso
-  constructor(private categoriesRepository: ICategoriesRepository) {} // criamos nossa variavel de repositorio
+  constructor(
+    @inject('CategoriesRepository')
+    private categoriesRepository: ICategoriesRepository,
+  ) {} // criamos nossa variavel de repositorio
 
   loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
     // criamos um metodo para carregar as categorias do arquivo, que tem tem retorno uma promessa para esperar o carregamento para mostrar os dados
@@ -55,11 +60,11 @@ export default class ImportCategoryUseCase {
       // lemos dado por dado do array com o map
       const { name, description } = category;
       // recebemos o nome e a descrição de cada ele mento do array, que vem [{name, description}, {name, description}] assim no array, mas um de cada vez
-      const existsCategory = this.categoriesRepository.findByName(name);
+      const existsCategory = await this.categoriesRepository.findByName(name);
       // verificamos cada nome vindo do array com o findbyname
       if (!existsCategory) {
         // se não existir criamos uma nova categoria
-        this.categoriesRepository.create({ name, description });
+        await this.categoriesRepository.create({ name, description });
       }
     });
   }
