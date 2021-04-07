@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-constructor */
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../../errors/AppError';
 
 import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'; // importamos os tipos de manipulação de dados a serem feitas por um repositorio
 
@@ -24,7 +25,7 @@ export default class CreateCategoryUseCase {
     // agora usamos o this para ter acesso a variavel privada e usar o metodo findByname que a interface vai mandar para o repositorio que implementos o repositorio usando o implements
     if (categoryAlreadyExists) {
       // se encontrarmos o nome informado a categoria não vai poder ser criada e vamos retornar um erro
-      throw new Error('Category already exists'); // infromamos um erro js pq a tratativa de erros vem depois no curso
+      throw new AppError('Category already exists'); // infromamos um erro js pq a tratativa de erros vem depois no curso
     }
 
     this.categoriesRepository.create({ name, description }); // se não encontrar vamos passar o nome e a descrição para o nosso repositorio e usar o metodo create para armazenar os dados no array

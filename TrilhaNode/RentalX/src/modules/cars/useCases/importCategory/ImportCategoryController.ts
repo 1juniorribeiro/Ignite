@@ -11,6 +11,6 @@ export default class ImportCategoryController {
 
     await importCategoryUseCase.execute(file); // passamos para nosso useCase na função execute
 
-    return response.send(); // e retornamos a resposta que vem do useCase
+    return response.status(201).send(); // e retornamos a resposta que vem do useCase
   }
 }
