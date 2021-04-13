@@ -22,7 +22,7 @@ export default class ImportCategoryUseCase {
     return new Promise((resolve, reject) => {
       // retornamos do metodo uma nova promessa com um resolve  e um reject
       const stream = fs.createReadStream(file.path);
-      // criamos nossa variavel de stram que recebe a função de ler o arquivo em modo de strem, que é um pedaço do arquivo de cada vez
+      // criamos nossa variavel de stream que recebe a função de ler o arquivo em modo de stream, que é um pedaço do arquivo de cada vez
       const categories: IImportCategory[] = [];
       // criamos nosso array de categorias do tipo de import categorias que éo tipo de dados que vem no arquivo csv
       const parseFile = csvParse();
