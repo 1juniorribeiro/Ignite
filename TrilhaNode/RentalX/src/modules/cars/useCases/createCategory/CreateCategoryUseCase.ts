@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-constructor */
 import { inject, injectable } from 'tsyringe';
-import AppError from '../../../../errors/AppError';
 
-import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'; // importamos os tipos de manipulação de dados a serem feitas por um repositorio
+import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository'; // importamos os tipos de manipulação de dados a serem feitas por um repositorio
+import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   // criamos um tipo request para definir quais informações vao ser recrecebidas

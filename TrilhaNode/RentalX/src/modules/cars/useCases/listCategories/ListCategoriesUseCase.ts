@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
-import Category from '../../entities/Category'; // importamos o model para validar os atributos
-import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
+
+import Category from '@modules/cars/infra/typeorm/entities/Category'; // importamos o model para validar os atributos
+import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository';
 
 @injectable()
 export default class ListCategoriesUseCase {

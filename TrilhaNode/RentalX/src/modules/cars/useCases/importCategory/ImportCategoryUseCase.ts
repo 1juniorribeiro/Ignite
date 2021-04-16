@@ -1,7 +1,8 @@
-import fs from 'fs'; // importamos a biblioteca de filesystem do proprio node para o gerenciamento de arquivos
 import csvParse from 'csv-parse'; // importamos o csvparse que faz a leitura e converte o scv em dados
+import fs from 'fs'; // importamos a biblioteca de filesystem do proprio node para o gerenciamento de arquivos
 import { inject, injectable } from 'tsyringe';
-import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'; // importamos a tipagem do repositorio
+
+import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository'; // importamos a tipagem do repositorio
 
 interface IImportCategory {
   // criamos a tipagem dos dados da categoria que vamos ler no arquivo csv

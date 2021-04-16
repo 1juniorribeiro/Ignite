@@ -1,10 +1,10 @@
 import { Router } from 'express'; // importamos o router do express para usarmos ele para gerenciar nossas rotas
-
 import multer from 'multer'; // importamos o multer para gerenciar nosso upload de arquivos
 
-import CreateCategoryController from '../modules/cars/useCases/createCategory/CreateCategoryController';
-import ListCategoriesController from '../modules/cars/useCases/listCategories/ListCategoriesController';
-import ImportCategoryController from '../modules/cars/useCases/importCategory/ImportCategoryController';
+import CreateCategoryController from '@modules/cars/useCases/createCategory/CreateCategoryController';
+import ImportCategoryController from '@modules/cars/useCases/importCategory/ImportCategoryController';
+import ListCategoriesController from '@modules/cars/useCases/listCategories/ListCategoriesController';
+
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const categoriesRoutes = Router(); // atribuimos as funções do router para nnosso categoriesroutes

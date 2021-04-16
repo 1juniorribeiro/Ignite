@@ -1,4 +1,4 @@
-import Category from '../entities/Category';
+import Category from '../infra/typeorm/entities/Category';
 
 // DTO => Data transfer object,  criar um objeto que vai ser responsavel pela transferencia de dados entre uma camada e outra
 interface ICreateCategoryDTO {

@@ -4,11 +4,12 @@ import express, { NextFunction, Request, Response } from 'express'; // importamo
 import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
 
-import './database';
-import './shared/container';
-import router from './routes'; // importamos o arquivo de rotas da nossa pasta de rotas
-import swaggerFile from './swagger.json';
-import AppError from './errors/AppError';
+import '../typeorm';
+import '@shared/container';
+import AppError from '@shared/errors/AppError';
+import router from '@shared/infra/http/routes'; // importamos o arquivo de rotas da nossa pasta de rotas
+
+import swaggerFile from '../../../swagger.json';
 
 const app = express(); // colocamos a constante app para receber as funções do express
 app.use(express.json()); // colocamos o app para usar json

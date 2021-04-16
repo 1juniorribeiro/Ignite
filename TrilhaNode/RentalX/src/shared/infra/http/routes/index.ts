@@ -1,8 +1,9 @@
 import { Router } from 'express'; // importamos o router, gerenciador de rotas do express
+
+import authenticateRoutes from './authenticate.routes';
 import categoriesRoutes from './categories.routes'; // importamos nossas duas rotas criadas
 import specificationsRoutes from './specifications.routes';
 import usersRoutes from './users.routes';
-import authenticateRoutes from './authenticate.routes';
 
 const router = Router(); // atribuimos nosso Router a uma variavel para executar suas funções
 

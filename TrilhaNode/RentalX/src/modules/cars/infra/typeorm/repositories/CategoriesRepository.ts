@@ -1,10 +1,11 @@
 import { getRepository, Repository } from 'typeorm';
-import Category from '../../entities/Category'; // importamos o model de categoria, a classe que representa o modelo e a tipagem dos dados
+
 import {
   // importamos a interface de transferencia de dados via objeto e a interface padrao do repositorio
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from '../ICategoriesRepository';
+} from '../../../repositories/ICategoriesRepository';
+import Category from '../entities/Category'; // importamos o model de categoria, a classe que representa o modelo e a tipagem dos dados
 
 export default class CategoriesRepository implements ICategoriesRepository {
   // criamos a classe do repositorio implementando o tipo de operações que ele vai utilizar, que vai executar todas as manipulações de dados

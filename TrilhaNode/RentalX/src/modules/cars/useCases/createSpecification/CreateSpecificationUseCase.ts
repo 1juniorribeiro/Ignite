@@ -1,7 +1,8 @@
 /* eslint-disable no-useless-constructor */
 import { inject, injectable } from 'tsyringe';
-import AppError from '../../../../errors/AppError';
-import ISpecificationRepository from '../../repositories/implementations/SpecificationRepository'; // importamos o nosso repositorio, vale lembrar que importamos o repositorio e não a implementação dele, tem q ser desse tipo
+
+import ISpecificationRepository from '@modules/cars/infra/typeorm/repositories/SpecificationRepository'; // importamos o nosso repositorio, vale lembrar que importamos o repositorio e não a implementação dele, tem q ser desse tipo
+import AppError from '@shared/errors/AppError';
 // ai no nosso index desse caso de uso colocamos o repositorio a ser usado
 interface IRequest {
   // definimos o tipo de informção que nosso caso de uso vai receber
