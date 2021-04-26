@@ -3,6 +3,7 @@ import { Router } from 'express'; // importamos o router, gerenciador de rotas d
 import authenticateRoutes from './authenticate.routes';
 import carsRoutes from './cars.routes';
 import categoriesRoutes from './categories.routes'; // importamos nossas duas rotas criadas
+import rentalRoutes from './rental.routes';
 import specificationsRoutes from './specifications.routes';
 import usersRoutes from './users.routes';
 
@@ -13,5 +14,6 @@ router.use('/specifications', specificationsRoutes);
 router.use('/users', usersRoutes);
 router.use('/cars', carsRoutes);
 router.use(authenticateRoutes);
+router.use('/rentals', rentalRoutes);
 
 export default router; // exportamos nossas rotas para o server usar
