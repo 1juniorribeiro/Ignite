@@ -18,7 +18,7 @@ describe('Authenticate User', () => {
     createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
 
-  it('shoud be able to authenticate an user', async () => {
+  it('should be able to authenticate an user', async () => {
     const user: ICreateUserDTO = {
       driver_license: '00123',
       email: 'user@test.com',

@@ -37,6 +37,8 @@ describe('List Categories', () => {
 
     const { token } = responseToken.body;
 
+    console.log(token);
+
     await request(app)
       .post('/categories')
       .send({
@@ -44,7 +46,7 @@ describe('List Categories', () => {
         description: 'Category supertest',
       })
       .set({
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       });
 
     const response = await request(app).get('/categories');
