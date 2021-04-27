@@ -9,13 +9,13 @@ async function create() {
   const id = uuidV4();
   const password = await hash('admin', 8);
 
-  connection.query(
+  await connection.query(
     `INSERT INTO USERS(id, name, email, password, "isAdmin", created_at, driver_license)
       values('${id}', 'admin', 'admin@rentx.com.br', '${password}', true, 'now()', 'xxxxx')
     `,
   );
 
-  await connection.close;
+  await connection.close();
 }
 
 create().then(() => console.log('User Admin created'));
