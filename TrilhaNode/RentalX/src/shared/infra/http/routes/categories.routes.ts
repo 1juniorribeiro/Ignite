@@ -19,6 +19,8 @@ const createCategoryController = new CreateCategoryController();
 const importCategoryController = new ImportCategoryController();
 const listCategoriesController = new ListCategoriesController();
 
+categoriesRoutes.get('/', listCategoriesController.handle);
+
 categoriesRoutes.use(ensureAuthenticated);
 categoriesRoutes.post(
   '/',
@@ -26,8 +28,6 @@ categoriesRoutes.post(
   ensureAdmin,
   createCategoryController.handle,
 );
-
-categoriesRoutes.get('/', listCategoriesController.handle);
 
 categoriesRoutes.post(
   '/import',
@@ -37,4 +37,4 @@ categoriesRoutes.post(
   importCategoryController.handle,
 );
 
-export default categoriesRoutes; // exportamos a rota, que importamos no server
+export default categoriesRoutes;

@@ -37,8 +37,6 @@ describe('List Categories', () => {
 
     const { token } = responseToken.body;
 
-    console.log(token);
-
     await request(app)
       .post('/categories')
       .send({
@@ -50,6 +48,8 @@ describe('List Categories', () => {
       });
 
     const response = await request(app).get('/categories');
+
+    console.log(response.body);
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
