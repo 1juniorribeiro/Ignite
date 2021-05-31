@@ -8,6 +8,7 @@
         "lcov",
         "middlewares",
         "o",
+        "originalname",
         "senha"
     ]
 }
